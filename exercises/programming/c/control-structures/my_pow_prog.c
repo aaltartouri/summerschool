@@ -1,6 +1,7 @@
 /* my_pow.c -- Print out powers of k: 1, k, k^2, k^3, .. up to k^N */
 
 #include <stdio.h>
+#include <math.h>
 
 int main(void)
 {
@@ -15,7 +16,12 @@ int main(void)
 
     /* Add here a for loop that at each iteration prints out
        the current value of the power and updates val */
-#error Add the missing loop
+    for (int i = 0; i <= N; i++) {
+      val = pow(k, i);
+      printf("\t  -  \t    %d\n", val);
+    }
+
+//#error Add the missing loop
 
     return 0;
 }

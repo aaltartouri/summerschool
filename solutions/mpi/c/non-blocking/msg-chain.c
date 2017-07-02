@@ -53,9 +53,13 @@ int main(int argc, char *argv[])
     /* Blocking wait for messages */
     MPI_Waitall(2, requests, statuses);
 
+    t1 = MPI_Wtime();
+    MPI_Barrier(MPI_COMM_WORLD);
+    fflush(stdout);
+
     /* Use status parameter to find out the no. of elements received */
     MPI_Get_count(&statuses[0], MPI_INT, &count);
-    printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
+/*    printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
             myid, size, myid + 1, destination);
     printf("Receiver: %d. Received elements: %d. Tag %d. Sender: %d.\n",
             myid, count, statuses[0].MPI_TAG, statuses[0].MPI_SOURCE);
@@ -63,7 +67,7 @@ int main(int argc, char *argv[])
     t1 = MPI_Wtime();
     MPI_Barrier(MPI_COMM_WORLD);
     fflush(stdout);
-
+*/
     printf("Time elapsed in rank %2d: %6.3f\n", myid, t1 - t0);
 
     free(message);

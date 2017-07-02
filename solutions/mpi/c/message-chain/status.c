@@ -48,11 +48,11 @@ int main(int argc, char *argv[])
                  MPI_COMM_WORLD, &status);
     /* Use status parameter to find out the no. of elements received */
     MPI_Get_count(&status, MPI_INT, &count);
-    printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
+/*    printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
             myid, size, myid + 1, destination);
     printf("Receiver: %d. Received elements: %d. Tag %d. Sender: %d.\n",
             myid, count, status.MPI_TAG, status.MPI_SOURCE);
-
+*/
     t1 = MPI_Wtime();
     MPI_Barrier(MPI_COMM_WORLD);
     fflush(stdout);

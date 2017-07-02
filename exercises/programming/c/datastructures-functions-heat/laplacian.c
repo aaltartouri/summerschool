@@ -26,7 +26,7 @@ int main(void)
         laplacian[i][0] = laplacian[i][NY - 1] = 0.0;
     for (j = 0; i < NY; j++)
         laplacian[0][j] = laplacian[NX - 1][j] = 0.0;
-
+	
     // Initial conditions for top and bottom
     for (i = 0; i < NX; i++) {
         array[i][0] = 30.0;
@@ -40,7 +40,15 @@ int main(void)
 
     // Evaluate the Laplacian
     // *INDENT-OFF*
-#error Add the missing part
+//#error Add the missing part
+    for (i = 1; i < NX - 2; i++) {
+        for (j = 1; j < NY - 2; j++) {
+            laplacian[i][j] =
+                (array[i-1][j] - 2.0 * array[i][j] + array[i+1][j]) / (DX * DX) +
+                (array[i][j-1] - 2.0 * array[i][j] + array[i][j+1]) / (DY * DY);
+        }
+    }
+
  
     // *INDENT-ON*
 

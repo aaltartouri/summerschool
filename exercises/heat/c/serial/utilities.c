@@ -45,3 +45,4 @@ void swap_fields(field *temperature1, field *temperature2)
     temperature1->data = temperature2->data;
     temperature2->data = tmp;
 }
+
