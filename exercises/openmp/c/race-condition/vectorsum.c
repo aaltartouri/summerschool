@@ -15,9 +15,12 @@ int main(void)
 
     sum = 0.0;
     /* TODO: Parallelize computation */
+#pragma omp parallel for private(i)
     for (i = 0; i < NX; i++) {
+#pragma omp critical(addition)
         sum += vecA[i];
     }
+
     printf("Sum: %ld\n",sum);
 
     return 0;
