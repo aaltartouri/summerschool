@@ -4,8 +4,10 @@
 int main(int argc, char **argv)
 {
     int rank;
-    int array[8][8];
-    //TODO: Declare a variable storing the MPI datatype 
+    int rows = 8, cols = 8;
+    int array[rows][cols]; // in C99 only!
+    //TODO: Declare a variable storing the MPI datatype
+    MPI_Datatype vec;
 
     int i, j;
 
@@ -27,12 +29,19 @@ int main(int argc, char **argv)
         }
     }
 
-
     //TODO: Create datatype that describes one column. Use MPI_Type_vector.
-    
+    MPI_Type_vector(rows, 1, cols, MPI_INT, &vec);
+    MPI_Type_commit(&vec);
+
     //TODO: Send first column of matrix form rank 0 to rank 1
+    if (rank == 0) {
+        MPI_Send(array, 1, vec, 1, 0, MPI_COMM_WORLD);
+    } else if (rank == 1) {
+        MPI_Recv(array, 1, vec, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    }
 
     //TODO: free datatype
+    /*below*///MPI_Type_free(&vec);
 
     // Print out the result on rank 1
     // The application is correct if the first column has the values of rank 0
@@ -46,7 +55,7 @@ int main(int argc, char **argv)
     }
     
 
-
+    MPI_Type_free(&vec);
     MPI_Finalize();
 
     return 0;
